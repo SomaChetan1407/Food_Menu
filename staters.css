@@ -1,0 +1,58 @@
+span {
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+* {
+    background-color: black;
+    color: white;
+}
+
+h3 {
+    text-align: center;
+}
+
+#menu-grid {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+
+}
+
+.menu-item img {
+    height: 200px;
+    width: 200px;
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: row;
+
+    padding: 15px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-name {
+    font-size: 20px;
+}
+
+.card-desc {
+    font-size: 15px;
+
+}
+
+.card-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.price {
+    font-size: 20px;
+}

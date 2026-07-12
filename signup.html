@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-left: 35vw;
+            border: 2px solid white;
+            border-radius: 30px;
+            padding: 20px;
+            width: 400px;
+            height: 550px;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #dc830e
+        }
+
+        button {
+            width: 100px;
+            height: 50px;
+            border-radius: 20px;
+            background-color: #dc830e;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: orange;
+        }
+
+        input {
+            width: 200px;
+            height: 50px;
+            border-radius: 20px;
+            text-align: center;
+            outline: none;
+        }
+
+        input:focus {
+            border: 4px double orange;
+        }
+
+        h2 {
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="signup">
+        <form>
+            <h2>Welcome!!</h2>
+            <h2 id="welcome_name"></h2>
+            <input type="text" placeholder="Phone Number" required maxlength="10">
+            <br>
+            <input type="text" placeholder="Full Name" required min="4" maxlength="45" id="My_Name">
+            <br>
+            <input type="email" placeholder="Email" required>
+            <br>
+            <input type="password" placeholder="Password" required min="8" maxlength="25">
+            <br>
+            <input type="password" placeholder="Confirm Password" required min="8" maxlength="25">
+            <br>
+            <input type="number" placeholder="OTP" required mim="4">
+            <button type="button">Get OTP</button>
+            <br>
+            <button type="submit" id="Login"><a href="index page.html">Login</a></button>
+            <br>
+
+        </form>
+    </div>
+    <script>
+        let Fullname;
+        document.getElementById("Login").onclick = function () {
+            Fullname = document.getElementById(`My_Name`).value;
+            document.getElementById('welcome_name').textContent = `Welcome!! ${Fullname}`;
+        }
+
+    </script>
+</body>
+
+</html>

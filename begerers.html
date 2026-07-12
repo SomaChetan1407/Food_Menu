@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restaurant Menu</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --cream: #fdf6ec;
+            --dark: #1a120b;
+            --brown: #5c3d2e;
+            --gold: #c8a96e;
+            --gold-light: #e8c99a;
+            --muted: #8a7060;
+            --card-bg: #fff9f2;
+            --shadow: 0 4px 24px rgba(92, 61, 46, 0.10);
+        }
+
+        body {
+            background: black;
+            font-family: 'Lato', sans-serif;
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 40px 20px 60px;
+        }
+
+        /* ── Header ── */
+        header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .tagline {
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            font-size: 0.75rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            font-weight: 700;
+            color: var(--brown);
+            line-height: 1.1;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin: 16px auto 0;
+        }
+
+        .divider span {
+            display: block;
+            height: 1px;
+            width: 80px;
+            background: var(--gold);
+        }
+
+        .divider i {
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
+
+        /* ── Section title ── */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--brown);
+            margin: 44px auto 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--gold-light);
+            max-width: 900px;
+        }
+
+        /* ── Grid ── */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 260px);
+            grid-column-gap: 50px;
+            grid-row-gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* ── Card ── */
+        .card {
+            background: orange;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.28s ease, box-shadow 0.28s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 36px rgba(92, 61, 46, 0.16);
+        }
+
+        /* image wrapper */
+        .card-img {
+            position: relative;
+            width: 100%;
+            height: 190px;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-img img {
+            transform: scale(1.07);
+        }
+
+        /* badge */
+        .badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--brown);
+            color: var(--gold-light);
+            font-size: 0.65rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        /* body */
+        .card-body {
+            padding: 18px 18px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .card-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .card-desc {
+            font-size: 0.82rem;
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 14px;
+        }
+
+        .price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--brown);
+        }
+
+        .price::before {
+            content: 'Rs ';
+            font-size: 0.85rem;
+            vertical-align: super;
+            margin-right: 1px;
+        }
+
+        .add-btn {
+            background: var(--brown);
+            color: var(--gold-light);
+            border: none;
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .add-btn:hover {
+            background: var(--gold);
+            color: var(--dark);
+        }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            margin-top: 56px;
+            font-size: 0.78rem;
+            color: var(--muted);
+            letter-spacing: 0.06em;
+        }
+
+        .back {
+            background-color: orange;
+            padding: 10px 20px;
+            border-radius: 20px;
+            float: right;
+            margin-right: 500px;
+        }
+
+        .back a {
+            text-decoration: none;
+            color: rgb(6, 6, 6);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <!-- <header>
+        <p class="tagline">Fine Dining Experience</p>
+        <h1>Maison Dorée</h1>
+        <div class="divider">
+            <span></span>
+            <i>✦</i>
+            <span></span>
+        </div>
+    </header> -->
+
+    <!-- STARTERS -->
+    <p class="section-title">Deserts</p>
+    <div class="menu-grid">
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://c.ndtvimg.com/2023-10/jkllqnf_cranberry-g--t_625x300_18_October_23.jpg" />
+
+            </div>
+            <div class="card-body">
+                <div class="card-name">Cranberry G & T</div>
+                <div class="card-desc">Cranberry G & T is a festive cocktail that’s perfect for holiday gatherings. It
+                    combines the tartness of cranberry juice with the botanical notes of gin and the zing of tonic
+                    water,
+                    garnished with fresh cranberries and a sprig of rosemary. It’s refreshing and visually stunning.
+                </div>
+                <div class="card-footer">
+                    <span class="price">680</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://c.ndtvimg.com/2023-08/vs8s0k08_cocktail_625x300_28_August_23.jpg" />
+                <span class="badge"></span>
+            </div>
+            <div class="card-body">
+                <div class="card-name">Blue Plantation</div>
+                <div class="card-desc">Blue Plantation is a refreshing and sophisticated cocktail that combines the
+                    tropical notes of pineapple and passion fruit with the smooth richness of dark rum and a hint of
+                    lime,
+                    garnished with a pineapple leaf and a maraschino cherry. It’s the perfect blend of sweet and tart.
+                </div>
+                <div class="card-footer">
+                    <span class="price">750</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://c.ndtvimg.com/2022-11/rhvs6fco_one8-commune-cocktails_625x300_19_November_22.jpg"
+                    alt="Shrimp Cocktail" />
+                <span class="badge">The Praan Recipe</span>
+                <span class="badge">Signature</span>
+            </div>
+            <div class="card-body">
+                <div class="card-name">The Praan Recipe</div>
+                <div class="card-desc">"The Praan" is a vibrant, spicy, and smoky cocktail, not a food dish,
+                    featuring a
+                    base of gin, peach schnapps, beetroot juice for color, and a fiery kick from ginger syrup and
+                    Tabasco
+                    It is a modern cocktail recipe designed to be a fragrant, flavorful drink</div>
+                <div class="card-footer">
+                    <span class="price">499</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <br>
+
+
+
+    <div class="menu-grid">
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://c.ndtvimg.com/kokum-sharbat-_625x300_1526985292990.jpg" />
+
+            </div>
+            <div class="card-body">
+                <div class="card-name">Kokum Sharbat</div>
+                <div class="card-desc">This vibrant pink beverage offers a unique blend of sweet, tart, and tangy
+                    flavours, with hints of sourness and spice. It's a delightful thirst-quencher that's perfect for
+                    refreshing yourself on a warm day.
+                </div>
+                <div class="card-footer">
+                    <span class="price">750</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://c.ndtvimg.com/2023-02/fl0baaoo_bo-tai-cocktail_625x300_13_February_23.jpg" />
+                <span class="badge">Popular</span>
+
+            </div>
+            <div class="card-body">
+                <div class="card-name">Bo-Tai Cocktail</div>
+                <div class="card-desc"> Bo-Tai cocktail is a refreshing alcoholic beverage made with white rum, fresh
+                    lime juice, orange curaçao, orgeat syrup, and sometimes a dash of Angostura bitters, garnished with
+                    a
+                    cherry and orange slice, served chilled, often over crushed ice.</div>
+                <div class="card-footer">
+                    <span class="price">850</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://c.ndtvimg.com/2023-05/sfj62tpg_blueberry-gin-fizz_625x300_12_May_23.jpg" />
+                <span class="badge">Veggie</span>
+            </div>
+            <div class="card-body">
+                <div class="card-name">Blueberry Gin Fizz Recipe</div>
+                <div class="card-desc"> Blueberry Gin Fizz is a refreshing cocktail that combines the tartness of
+                    blueberry juice with the smooth richness of gin and the zing of soda water, garnished with fresh
+                    blueberries and a sprig of mint. It’s perfect for a summer evening.</div>
+                <div class="card-footer">
+                    <span class="price">700</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <br>
+
+    <div class="menu-grid">
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/gin-free-gt-6e95923.jpg?quality=90&webp=true&resize=440,400"
+                    alt="Pecan Pie" />
+                <span class="badge">Popular</span>
+            </div>
+            <div class="card-body">
+                <div class="card-name">Non-alcoholic G&T</div>
+                <div class="card-desc">Discover how to make a non-alcoholic G&T, a refreshing alcohol-free
+                    alternative to the classic gin and tonic, perfect for those who want to enjoy a sophisticated
+                    drink without the alcohol, with simple ingredients and easy-to-follow instructions.
+                </div>
+                <div class="card-footer">
+                    <span class="price">900</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/new-york-sour-mocktail-f49641f.jpg?quality=90&webp=true&resize=440,400"
+                    alt="Fresh Strawberry Bars" />
+            </div>
+            <div class="card-body">
+                <div class="card-name">New York Sour Mocktail</div>
+                <div class="card-desc">The New York Sour Mocktail is a sophisticated, alcohol-free twist on the
+                    classic cocktail. It features a vibrant base of lemon and lime juice mixed with a hint of maple
+                    syrup for depth, topped with a float of dark, non-alcoholic red wine or deep red fruit juice,
+                    creating a beautiful layered effect that’s both visually stunning and delicious.</div>
+                <div class="card-footer">
+                    <span class="price">800</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>All prices include tax &nbsp;·&nbsp; Allergen information available on request</footer>
+    <button class="back"><a href="index page.html" target="_self">Back</a></button>
+
+</body>
+
+</html>

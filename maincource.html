@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restaurant Menu</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --cream: #fdf6ec;
+            --dark: #1a120b;
+            --brown: #5c3d2e;
+            --gold: #c8a96e;
+            --gold-light: #e8c99a;
+            --muted: #8a7060;
+            --card-bg: #fff9f2;
+            --shadow: 0 4px 24px rgba(92, 61, 46, 0.10);
+        }
+
+        body {
+            background: black;
+            font-family: 'Lato', sans-serif;
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 40px 20px 60px;
+        }
+
+        /* ── Header ── */
+        header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .tagline {
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            font-size: 0.75rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            font-weight: 700;
+            color: var(--brown);
+            line-height: 1.1;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin: 16px auto 0;
+        }
+
+        .divider span {
+            display: block;
+            height: 1px;
+            width: 80px;
+            background: var(--gold);
+        }
+
+        .divider i {
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
+
+        /* ── Section title ── */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--brown);
+            margin: 44px auto 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--gold-light);
+            max-width: 900px;
+        }
+
+        /* ── Grid ── */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 260px);
+            grid-column-gap: 50px;
+            grid-row-gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* ── Card ── */
+        .card {
+            background: orange;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.28s ease, box-shadow 0.28s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 36px rgba(92, 61, 46, 0.16);
+        }
+
+        /* image wrapper */
+        .card-img {
+            position: relative;
+            width: 100%;
+            height: 190px;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-img img {
+            transform: scale(1.07);
+        }
+
+        /* badge */
+        .badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--brown);
+            color: var(--gold-light);
+            font-size: 0.65rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        /* body */
+        .card-body {
+            padding: 18px 18px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .card-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .card-desc {
+            font-size: 0.82rem;
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 14px;
+        }
+
+        .price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--brown);
+        }
+
+        .price::before {
+            content: 'Rs ';
+            font-size: 0.85rem;
+            vertical-align: super;
+            margin-right: 1px;
+        }
+
+        .add-btn {
+            background: var(--brown);
+            color: var(--gold-light);
+            border: none;
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .add-btn:hover {
+            background: var(--gold);
+            color: var(--dark);
+        }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            margin-top: 56px;
+            font-size: 0.78rem;
+            color: var(--muted);
+            letter-spacing: 0.06em;
+        }
+
+        .back {
+            background-color: orange;
+            padding: 10px 20px;
+            border-radius: 20px;
+            float: right;
+            margin-right: 500px;
+        }
+
+        .back a {
+            text-decoration: none;
+            color: rgb(6, 6, 6);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER
+    <header>
+        <p class="tagline">Fine Dining Experience</p>
+        <h1>Maison Dorée</h1>
+        <div class="divider">
+            <span></span>
+            <i>✦</i>
+            <span></span>
+        </div>
+    </header> -->
+
+    <!-- STARTERS -->
+    <p class="section-title">MainCourse</p>
+    <div class="menu-grid">
+
+        <div class="card">
+            <div class="card-img">
+                <img
+                    src="https://images.immediate.co.uk/production/volatile/sites/30/2020/08/Mutant-Bolognese-f014695.jpg?quality=90&webp=true&resize=800,726" />
+
+            </div>
+            <div class="card-body">
+                <div class="card-name">Mutant spaghetti bolognese</div>
+                <div class="card-desc">Made with hidden veg - roasted sweet potato & red lentil bolognese with courgette
+                    pasta.
+                </div>
+                <div class="card-footer">
+                    <span class="price">1000</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img
+                    src="https://www.maggiarabia.com/sites/default/files/styles/srh_recipes/public/srh_recipes/30c29da8aec1403f42e82552d927abab.png?h=4f5b30f1&itok=7l1fu_HB" />
+                <span class="badge">spicy</span>
+            </div>
+            <div class="card-body">
+                <div class="card-name"> Hyderabadi Dum Biryani</div>
+                <div class="card-desc">a fragrant, celebratory rice dish originating from Persia and perfected in South
+                    Asia, typically featuring long-grain basmati rice layered with marinated meat (chicken, lamb, goat)
+                    or vegetables, ghee, and spices</div>
+                <div class="card-footer">
+                    <span class="price">750</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGv6Lc6lhRy6OUxboo4ZBuo5zBb0YATVMQQA&s"
+                    alt="Shrimp Cocktail" />
+                <span class="badge">Chef's Pick</span>
+                <span class="badge">Signature</span>
+            </div>
+            <div class="card-body">
+                <div class="card-name">Pure Telugu Lunch</div>
+                <div class="card-desc">a balanced, multi-course meal designed to be both nutritious and bursting with
+                    flavor, commonly served on a banana leaf for a fragrant, eco-friendly experience </div>
+                <div class="card-footer">
+                    <span class="price">499</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <br>
+
+
+
+    <div class="menu-grid">
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2018/08/mutton-keema-recipe.jpg" />
+
+            </div>
+            <div class="card-body">
+                <div class="card-name">Mutton Keema</div>
+                <div class="card-desc">It is a quick-cooking, flavorful mince dish made with lamb or mutton, onion,
+                    tomatoes, and a vibrant blend of Indian spices.</div>
+                <div class="card-footer">
+                    <span class="price">750</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img
+                    src="https://i.ytimg.com/vi/4RQ5QWuFkww/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLC4eFt-dLQfIZtLgUFGeaBROCZaZw    " />
+                <span class="badge">Popular</span>
+
+            </div>
+            <div class="card-body">
+                <div class="card-name">Ragi mudda and natukodi pulusu</div>
+                <div class="card-desc"> is a hearty, traditional Andhra meal where tender, free-range chicken is
+                    slow-cooked
+                    in a flavorful gravy made with onions, tomatoes, ginger, garlic, green chilies, and a blend of
+                    aromatic
+                    Indian spices</div>
+                <div class="card-footer">
+                    <span class="price">850</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://images.slurrp.com/prod/articles/jnln5ez2cwk.webp" />
+                <span class="badge">Veggie</span>
+            </div>
+            <div class="card-body">
+                <div class="card-name"> idiyappam and kurma</div>
+                <div class="card-desc"> idiyappam is steamed rice noodles formed into a nest-like shape. It is soft,
+                    bouncy, and slightly chewy. Kurma is a flavorful, creamy curry made with a blend of roasted spices,
+                    coconut milk, vegetables, and sometimes chicken.</div>
+                <div class="card-footer">
+                    <span class="price">700</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <br>
+
+    <div class="menu-grid">
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRKEoKRezBKpHWYUIbZaKX9Kw_qCv-hQfTVw&s"
+                    alt="Dosa and Sambar" />
+                <span class="badge">Popular</span>
+            </div>
+            <div class="card-body">
+                <div class="card-name">Dosa and Sambar</div>
+                <div class="card-desc">Dosa is a thin, crispy fermented crepe made from rice and lentil batter, often
+                    served plain or stuffed with potatoes, vegetables, paneer, or minced meat. Sambar is a flavorful
+                    South Indian lentil-based vegetable stew seasoned with tamarind, fenugreek, and a special blend of
+                    spices.</div>
+                <div class="card-footer">
+                    <span class="price">900</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2LvdtYRvO5xjZYhDPdzYMc2IWjbbo5MS3eQ&s"
+                    alt="Fish Fry" />
+            </div>
+            <div class="card-body">
+                <div class="card-name">Fish Fry</div>
+                <div class="card-desc"> it is an all-time Andhra favorite, made with fresh fish marinated in
+                    lemon juice, ginger-garlic paste, turmeric, chili powder, and salt, then shallow-fried until
+                    golden-brown and crisp on the outside while remaining tender and succulent on the inside.
+                </div>
+                <div class="card-footer">
+                    <span class="price">800</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <button class="back"><a href="index page.html" target="_self">Back</a></button>
+
+
+    <footer>All prices include tax &nbsp;·&nbsp; Allergen information available on request</footer>
+
+</body>
+
+</html>

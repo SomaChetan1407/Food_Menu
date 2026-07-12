@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restaurant Menu</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --cream: #fdf6ec;
+            --dark: #1a120b;
+            --brown: #5c3d2e;
+            --gold: #c8a96e;
+            --gold-light: #e8c99a;
+            --muted: #8a7060;
+            --card-bg: #fff9f2;
+            --shadow: 0 4px 24px rgba(92, 61, 46, 0.10);
+        }
+
+        body {
+            background: black;
+            font-family: 'Lato', sans-serif;
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 40px 20px 60px;
+        }
+
+        /* ── Header ── */
+        header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .tagline {
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            font-size: 0.75rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            font-weight: 700;
+            color: var(--brown);
+            line-height: 1.1;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin: 16px auto 0;
+        }
+
+        .divider span {
+            display: block;
+            height: 1px;
+            width: 80px;
+            background: var(--gold);
+        }
+
+        .divider i {
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
+
+        /* ── Section title ── */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--brown);
+            margin: 44px auto 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--gold-light);
+            max-width: 900px;
+        }
+
+        /* ── Grid ── */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 260px);
+            grid-column-gap: 50px;
+            grid-row-gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* ── Card ── */
+        .card {
+            background: orange;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.28s ease, box-shadow 0.28s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 36px rgba(92, 61, 46, 0.16);
+        }
+
+        /* image wrapper */
+        .card-img {
+            position: relative;
+            width: 100%;
+            height: 190px;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-img img {
+            transform: scale(1.07);
+        }
+
+        /* badge */
+        .badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--brown);
+            color: var(--gold-light);
+            font-size: 0.65rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        /* body */
+        .card-body {
+            padding: 18px 18px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .card-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .card-desc {
+            font-size: 0.82rem;
+            color: var(--muted);
+            font-weight: 300;
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 14px;
+        }
+
+        .price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--brown);
+        }
+
+        .price::before {
+            content: 'Rs ';
+            font-size: 0.85rem;
+            vertical-align: super;
+            margin-right: 1px;
+        }
+
+        .add-btn {
+            background: var(--brown);
+            color: var(--gold-light);
+            border: none;
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .add-btn:hover {
+            background: var(--gold);
+            color: var(--dark);
+        }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            margin-top: 56px;
+            font-size: 0.78rem;
+            color: var(--muted);
+            letter-spacing: 0.06em;
+        }
+
+        .back {
+            background-color: orange;
+            padding: 10px 20px;
+            border-radius: 20px;
+            float: right;
+            margin-right: 500px;
+        }
+
+        .back a {
+            text-decoration: none;
+            color: rgb(6, 6, 6);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <!-- <header>
+        <p class="tagline">Fine Dining Experience</p>
+        <h1>Maison Dorée</h1>
+        <div class="divider">
+            <span></span>
+            <i>✦</i>
+            <span></span>
+        </div>
+    </header> -->
+
+    <!-- STARTERS -->
+    <p class="section-title">Deserts</p>
+    <div class="menu-grid">
+
+        <div class="card">
+            <div class="card-img">
+                <img
+                    src="https://www.recipetineats.com/tachyon/2025/10/Chocolate-pudding-pots_0.jpg?resize=1200%2C1500&zoom=0.86" />
+
+            </div>
+            <div class="card-body">
+                <div class="card-name">Chocolate pudding</div>
+                <div class="card-desc">Chocolate Pudding Pots – for all your dinner party dessert needs! Think – a
+                    richer, more luxurious Chocolate Mousse, with a fraction of the work. Tastes sophisticated. Easy to
+                    pretty up. Make ahead 5 days!
+                </div>
+                <div class="card-footer">
+                    <span class="price">680</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img
+                    src="https://www.recipetineats.com/tachyon/2021/04/Pistacchio-Pear-Tart_2.jpg?resize=747%2C747&zoom=0.72" />
+                <span class="badge"></span>
+            </div>
+            <div class="card-body">
+                <div class="card-name">Pistachio Pear Tart</div>
+                <div class="card-desc">This delightful Pear Tart is filled with a frangipane cream made with pistachios
+                    rather than the usual almonds, which gives it a dazzling green colour and stunning flavour. Made
+                    with a classic buttery French Tart Crust, it’s a perfect Autumn dessert that makes the most of ripe
+                    pears. Smart and yet rustically casual, this tart is fitting for any occasion!</div>
+                <div class="card-footer">
+                    <span class="price">750</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://www.recipetineats.com/tachyon/2020/08/Blueberry-Cheesecake_1.jpg?resize=900%2C1260&zoom=1"
+                    alt="Shrimp Cocktail" />
+                <span class="badge">Chef's Pick</span>
+                <span class="badge">Signature</span>
+            </div>
+            <div class="card-body">
+                <div class="card-name">Blueberry Cheesecake</div>
+                <div class="card-desc">To say this Blueberry Cheesecake is bursting with blueberries is an
+                    understatement! Baked to achieve that elusive light-yet-rich creamy cheesecake filling, studded with
+                    blueberries inside and smothered in an incredible glossy blueberry sauce topping. It’s magnificent!
+                </div>
+                <div class="card-footer">
+                    <span class="price">499</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <br>
+
+
+
+    <div class="menu-grid">
+
+        <div class="card">
+            <div class="card-img">
+                <img
+                    src="https://www.recipetineats.com/tachyon/2016/11/Chocolate-Self-Saucing-Pudding-4.jpg?resize=964%2C1350&zoom=1" />
+
+            </div>
+            <div class="card-body">
+                <div class="card-name">Chocolate Self Saucing Pudding</div>
+                <div class="card-desc">Chocolate Self Saucing Pudding is a classic dessert that everyone should know!
+                    One batter magically transforms into a moist chocolate cake with a beautiful chocolate sauce. Quick
+                    enough for a midweek treat, and a crowd pleaser for dinner parties..</div>
+                <div class="card-footer">
+                    <span class="price">750</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://www.recipetineats.com/tachyon/2014/05/Strawberry-Cheesecake-Sundae-680x988.jpg" />
+                <span class="badge">Popular</span>
+
+            </div>
+            <div class="card-body">
+                <div class="card-name">Strawberry Cheesecake Sundae Pots</div>
+                <div class="card-desc"> Like the look of this? It’s incredibly easy to make – and no bake! A twist on
+                    the classic cheesecake, this is perfect for entertaining because all the elements can be made ahead
+                    then simply assembled prior to serving. Put your own touch on it with variations such as a touch of
+                    spice to the crumble, or using other fruits. Impress your family and friends with this gorgeous
+                    treat!</div>
+                <div class="card-footer">
+                    <span class="price">850</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img
+                    src="https://www.recipetineats.com/tachyon/2025/07/Red-velvet-cheesecake_5.jpg?resize=1200%2C1500&zoom=0.86" />
+                <span class="badge">Veggie</span>
+            </div>
+            <div class="card-body">
+                <div class="card-name"> Red Velvet Cheesecake</div>
+                <div class="card-desc"> Red Velvet Cheesecake!! A no-bake showstopper where the bold, striking colour of
+                    Red Velvet Cake meets the creamy decadence of cheesecake. The filling is beautifully chocolatey,
+                    rich-yet-light, with that signature velvety texture. Make this when you have people to impress –
+                    it’s special!</div>
+                <div class="card-footer">
+                    <span class="price">700</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <br>
+
+    <div class="menu-grid">
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://www.recipetineats.com/tachyon/2017/11/Pecan-Pie.jpg?resize=964%2C1350&zoom=1"
+                    alt="Pecan Pie" />
+                <span class="badge">Popular</span>
+            </div>
+            <div class="card-body">
+                <div class="card-name">Pecan Pie</div>
+                <div class="card-desc">Learn how to make the great American classic Pecan Pie, with a quick video
+                    tutorial! A flaky all-butter pastry with a perfectly set, soft custardy filling with beautiful
+                    pecans, this is arguably the mother of all pies.
+
+                </div>
+                <div class="card-footer">
+                    <span class="price">900</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://www.recipetineats.com/tachyon/2017/03/Strawberry-Bars-6.jpg?resize=964%2C1350&zoom=1"
+                    alt="Fresh Strawberry Bars" />
+            </div>
+            <div class="card-body">
+                <div class="card-name">Fresh Strawberry Bars</div>
+                <div class="card-desc"> A perfect bake for using up summer strawberries! These bars have a shortbread
+                    base, a layer of sweet strawberry jam, a tangy fresh strawberry filling and a buttery crumble
+                    topping. They’re delicious served slightly warm with cream or ice cream or once cooled with a
+                    light dusting of icing sugar.</div>
+                <div class="card-footer">
+                    <span class="price">800</span>
+                    <button class="add-btn">+</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>All prices include tax &nbsp;·&nbsp; Allergen information available on request</footer>
+    <button class="back"><a href="index page.html" target="_self">Back</a></button>
+
+</body>
+
+</html>

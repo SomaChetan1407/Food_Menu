@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: black;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 20vh;
+            margin-left: 35vw;
+            border: 2px solid white;
+            border-radius: 30px;
+            padding: 20px;
+            width: 300px;
+            height: 300px;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #dc830e
+        }
+
+        button {
+            width: 100px;
+            height: 50px;
+            border-radius: 20px;
+            background-color: #dc830e;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: orange;
+        }
+
+        input {
+            width: 200px;
+            height: 50px;
+            border-radius: 20px;
+            text-align: center;
+            outline: none;
+        }
+
+        input:focus {
+            border: 4px double orange;
+        }
+
+        h2 {
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login">
+
+        <form>
+            <h2>Welcome Back!</h2>
+            <input type="text" placeholder="Phone Number" required accept="9701241237" maxlength="10">
+            <br>
+            <input type="password" placeholder="Password" required accept="Chetan@1407" min="8" maxlength="25">
+            <br>
+            <button type="submit"><a href="index page.html">Login</a></button>
+            <br>
+            <a href="" style="color: orange">Forgot Password?</a>
+        </form>
+    </div>
+</body>
+
+</html>

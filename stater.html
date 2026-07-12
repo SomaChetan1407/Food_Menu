@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restaurant Menu</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --cream: #fdf6ec;
+            --dark: #1a120b;
+            --brown: #5c3d2e;
+            --gold: #c8a96e;
+            --gold-light: #e8c99a;
+            --muted: #8a7060;
+            --card-bg: #fff9f2;
+            --shadow: 0 4px 24px rgba(92, 61, 46, 0.10);
+        }
+
+        body {
+            background: black;
+            font-family: 'Lato', sans-serif;
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 40px 20px 60px;
+        }
+
+        /* ── Header ── */
+        header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .tagline {
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            font-size: 0.75rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            font-weight: 700;
+            color: var(--brown);
+            line-height: 1.1;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin: 16px auto 0;
+        }
+
+        .divider span {
+            display: block;
+            height: 1px;
+            width: 80px;
+            background: var(--gold);
+        }
+
+        .divider i {
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
+
+        /* ── Section title ── */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--brown);
+            margin: 44px auto 20px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--gold-light);
+            max-width: 900px;
+        }
+
+        /* ── Grid ── */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 260px);
+            grid-column-gap: 50px;
+            grid-row-gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* ── Card ── */
+        .card {
+            background: orange;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.28s ease, box-shadow 0.28s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 36px rgba(92, 61, 46, 0.16);
+        }
+
+        /* image wrapper */
+        .card-img {
+            position: relative;
+            width: 100%;
+            height: 190px;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-img img {
+            transform: scale(1.07);
+        }
+
+        /* badge */
+        .badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--brown);
+            color: var(--gold-light);
+            font-size: 0.65rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        /* body */
+        .card-body {
+            padding: 18px 18px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .card-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .card-desc {
+            font-size: 0.82rem;
+            color: rgb(43, 42, 42);
+            font-weight: 500;
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 14px;
+        }
+
+        .price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--brown);
+        }
+
+        .price::before {
+            content: 'Rs ';
+            font-size: 0.85rem;
+            vertical-align: super;
+            margin-right: 1px;
+        }
+
+        .add-btn {
+            background: var(--brown);
+            color: var(--gold-light);
+            border: none;
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .add-btn:hover {
+            background: var(--gold);
+            color: var(--dark);
+        }
+
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            margin-top: 56px;
+            font-size: 0.78rem;
+            color: var(--muted);
+            letter-spacing: 0.06em;
+        }
+
+        .back {
+            background-color: orange;
+            padding: 10px 20px;
+            border-radius: 20px;
+            float: right;
+            margin-right: 500px;
+        }
+
+        .back a {
+            text-decoration: none;
+            color: rgb(6, 6, 6);
+        }
+        .number{
+            color:var(--brown);
+            padding-right:30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- STARTERS -->
+    <p class="section-title">Starters</p>
+    <div class="menu-grid">
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=500&q=80" alt="Bruschetta" />
+                <span class="badge">Veggie</span>
+            </div>
+            <div class="card-body">
+                <div class="card-name">Tomato Bruschetta</div>
+                <div class="card-desc">Grilled sourdough topped with heirloom tomatoes, fresh basil, and aged balsamic.
+                </div>
+                <div class="card-footer">
+                    <span class="price">850</span>
+                    <button class="add-btn">+</button>
+                    <h4 class="number">0</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=500&q=80" alt="Soup" />
+            </div>
+            <div class="card-body">
+                <div class="card-name">French Onion Soup</div>
+                <div class="card-desc">Slow-caramelised onions in rich beef broth, crowned with a Gruyère crouton.</div>
+                <div class="card-footer">
+                    <span class="price">1900</span>
+                    <button class="add-btn">+</button>
+                    <h4 class="number">0</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://images.unsplash.com/photo-1541014741259-de529411b96a?w=500&q=80"
+                    alt="Shrimp Cocktail" />
+                <span class="badge">Chef's Pick</span>
+            </div>
+            <div class="card-body">
+                <div class="card-name">Shrimp Cocktail</div>
+                <div class="card-desc">Chilled tiger shrimp with house-made horseradish cocktail sauce and lemon.</div>
+                <div class="card-footer">
+                    <span class="price">1400</span>
+                    <button class="add-btn">+</button>
+                    <h4 class="number">0</h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <br>
+
+
+
+    <div class="menu-grid">
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS54dVkRwzZMaQoI3b7MYCng0PuQsE_4yd3OJfw2zakFeSU6kGV"
+                    alt="Steak" />
+                <span class="badge">Signature</span>
+            </div>
+            <div class="card-body">
+                <div class="card-name">Ribeye Steak</div>
+                <div class="card-desc">12 oz dry-aged ribeye, roasted garlic butter, truffle fries, and seasonal greens.
+                </div>
+                <div class="card-footer">
+                    <span class="price">4200</span>
+                    <button class="add-btn">+</button>
+                    <h4 class="number">0</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQxS_FpC3GZjc_gawRT7IVnpzrD7P1Nj1tbX1KCFyunW7KELunI"
+                    alt="Salmon" />
+            </div>
+            <div class="card-body">
+                <div class="card-name">Pan-Seared Salmon</div>
+                <div class="card-desc">Atlantic salmon fillet with lemon-caper beurre blanc, asparagus, and wild rice.
+                </div>
+                <div class="card-footer">
+                    <span class="price">2800</span>
+                    <button class="add-btn">+</button>
+                    <h4 class="number">0</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://d2vsf1hynzxim7.cloudfront.net/production/media/17322/responsive-images/foodnetwork-image-1aea466e-c069-4815-b629-7858f3931874___default_382_286.webp"
+                    alt="Veggie Bowl" />
+                <span class="badge">Veggie</span>
+            </div>
+            <div class="card-body">
+                <div class="card-name">Garden Harvest Bowl</div>
+                <div class="card-desc">Roasted seasonal vegetables, quinoa, avocado, and tahini-lemon drizzle.</div>
+                <div class="card-footer">
+                    <span class="price">1900</span>
+                    <button class="add-btn">+</button>
+                    <h4 class="number">0</h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <br>
+
+    <div class="menu-grid">
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://d2vsf1hynzxim7.cloudfront.net/production/media/26123/responsive-images/_279064_S002_E002_013___default_2480_1860.webp"
+                    alt="Chocolate Cake" />
+                <span class="badge">Popular</span>
+            </div>
+            <div class="card-body">
+                <div class="card-name">Dark Chocolate Fondant</div>
+                <div class="card-desc">Warm molten chocolate cake with vanilla bean ice cream and berry coulis.</div>
+                <div class="card-footer">
+                    <span class="price">900</span>
+                    <button class="add-btn">+</button>
+                    <h4 class="number">0</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img">
+                <img src="https://d2vsf1hynzxim7.cloudfront.net/production/media/22037/responsive-images/foodnetwork-image-b7d85193-970c-4fb9-87da-bcd459577f2d___default_382_287.jpg"
+                    alt="Crème Brûlée" />
+            </div>
+            <div class="card-body">
+                <div class="card-name">Crème Brûlée</div>
+                <div class="card-desc">Classic vanilla custard with a perfectly torched caramel crust and fresh mint.
+                </div>
+                <div class="card-footer">
+                    <span class="price">800</span>
+                    <button class="add-btn">+</button>
+                    <h4 class="number">0</h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <button class="back"><a href="index page.html" target="_self">Back</a></button>
+
+    <footer>All prices include tax information available on request</footer>
+<script src="js.js"></script>
+</body>
+
+</html>
